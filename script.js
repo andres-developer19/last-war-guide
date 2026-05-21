@@ -2,6 +2,9 @@ const eventTitle = document.getElementById("event-title")
 const tasksContainer = document.getElementById("tasks-container")
 const dayText = document.getElementById("day-text")
 
+const prevDayBtn = document.getElementById("prev-day")
+const nextDayBtn = document.getElementById("next-day")
+
 const days = [
   "Domingo",
   "Lunes",
@@ -18,64 +21,52 @@ const dailyEvents = {
     title: "Domingo de preparación",
     tasks: [
       "Guardar stamina",
-      "Completar tareas básicas",
       "Preparar mejoras",
-      "Revisar investigación",
-      "Ayudar a la alianza"
+      "Ayudar alianza"
     ]
   },
 
   1: {
     title: "Vs Construcción",
     tasks: [
-      "Usar aceleradores de construcción",
-      "Subir edificios importantes",
-      "Guardar radar para mañana",
-      "Donar a tecnología de alianza",
-      "Completar tareas diarias"
+      "Usar aceleradores",
+      "Mejorar edificios",
+      "Guardar radar"
     ]
   },
 
   2: {
     title: "Vs Investigación",
     tasks: [
-      "Mejorar investigaciones",
-      "Usar aceleradores de research",
-      "Subir poder tecnológico",
-      "Guardar EXP de héroes",
-      "Completar radar"
+      "Mejorar research",
+      "Usar speedups",
+      "Subir tecnología"
     ]
   },
 
   3: {
     title: "Vs Drone",
     tasks: [
-      "Mejorar drone",
+      "Subir drone",
       "Usar componentes",
-      "Subir gear",
-      "Guardar fragmentos UR",
-      "Preparar stamina"
+      "Mejorar gear"
     ]
   },
 
   4: {
     title: "Vs Héroes",
     tasks: [
-      "Abrir cartas de héroes",
-      "Subir experiencia de héroes",
-      "Usar fragmentos de héroes",
-      "Usar medallas de habilidad",
-      "Guardar tareas de radar para mañana"
+      "Abrir cartas",
+      "Subir experiencia",
+      "Usar fragmentos"
     ]
   },
 
   5: {
     title: "Vs Radar",
     tasks: [
-      "Completar tareas radar",
-      "Usar stamina",
+      "Completar radar",
       "Hacer rallies",
-      "Completar tareas secretas",
       "Farmear recursos"
     ]
   },
@@ -85,37 +76,67 @@ const dailyEvents = {
     tasks: [
       "Preparar tropas",
       "Curar unidades",
-      "Participar en guerras",
-      "Usar boosts",
-      "Coordinar con la alianza"
+      "Participar en guerra"
     ]
   }
 
 }
 
-const today = new Date().getDay()
+let selectedDay = new Date().getDay()
 
-dayText.textContent = `Hoy es ${days[today]}`
+function renderDay() {
 
-const currentEvent = dailyEvents[today]
+  const currentEvent = dailyEvents[selectedDay]
 
-if (currentEvent) {
+  dayText.textContent = `Hoy estás viendo: ${days[selectedDay]}`
 
-  eventTitle.textContent = currentEvent.title
+  tasksContainer.innerHTML = ""
 
-  currentEvent.tasks.forEach(task => {
+  if (currentEvent) {
 
-    const taskElement = document.createElement("label")
+    eventTitle.textContent = currentEvent.title
 
-    taskElement.classList.add("task")
+    currentEvent.tasks.forEach(task => {
 
-    taskElement.innerHTML = `
-      <input type="checkbox">
-      <span>${task}</span>
-    `
+      const taskElement = document.createElement("label")
 
-    tasksContainer.appendChild(taskElement)
+      taskElement.classList.add("task")
 
-  })
+      taskElement.innerHTML = `
+        <input type="checkbox">
+        <span>${task}</span>
+      `
+
+      tasksContainer.appendChild(taskElement)
+
+    })
+
+  }
 
 }
+
+prevDayBtn.addEventListener("click", () => {
+
+  selectedDay--
+
+  if (selectedDay < 0) {
+    selectedDay = 6
+  }
+
+  renderDay()
+
+})
+
+nextDayBtn.addEventListener("click", () => {
+
+  selectedDay++
+
+  if (selectedDay > 6) {
+    selectedDay = 0
+  }
+
+  renderDay()
+
+})
+
+renderDay()
