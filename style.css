@@ -148,3 +148,10 @@ header h1 {
   }
 
 }
+
+.footer p {
+  text-align: center;
+  padding: 20px;
+  background: #18181b;
+  color: #9ca3af;
+}
