@@ -18,88 +18,107 @@ const days = [
   const dailyEvents = {
 
   0: {
-    title: "Domingo - Preparación",
+    title: "Domingo",
     tasks: [
-      "Guardar recursos para el VS",
-      "Preparar construcciones",
-      "Preparar investigaciones",
+      "Preparar recursos para el VS",
       "Guardar aceleradores",
       "Coordinar estrategias con la alianza"
     ]
   },
 
   1: {
-    title: "Lunes - Drone & Radar",
+    title: "Lunes",
     tasks: [
-      "Tareas de radar (Guardar las tareas un día antes)",
-      "Gastar energía atacando dooms o zombies",
-      "Recolectar oro, hierro o madera",
-      "Subir nivel del dron",
-      "Abrir cofres de chip de dron",
-      "NO abrir cofres de complementos de dron"
+      "Tareas de radar (Guardar las tareas un dia antes)",
+
+      "Gastar energia (Atacando dooms o bien zombies)",
+
+      "Recolectando oro, hierro o madera (Dejarlo la noche de antes. y si estais trabajando mientras esteis en horario de trabajo dejar recolectando igual)",
+
+      "Subir de nivel del dron (Solo subimos el nivel del dron y si nos pide piezas de dron, nos dara mas puntos)",
+
+      "Abrir los cofres de chip de dron (Los cofres de CHIPS son los que si tenemos que abrir, TENER CUIDADO NO SON LOS COFRES DE COMPLEMENTOS DE DRON)"
     ]
   },
 
   2: {
-    title: "Martes - Construcción",
+    title: "Martes",
     tasks: [
-      "Guardar construcciones terminadas para reclamar hoy",
-      "Usar aceleradores de construcción",
-      "Usar camiones UR",
-      "Aceptar solo tareas secretas UR",
-      "Usar tickets de reclutamiento de supervivientes"
+      "Construccion (Intentar guardar construcciones sin abrir el regalo una vez haya terminado y abrir los regalos los MARTES, eso hara que sume puntos)",
+
+      "Aceleradores construccion (usar todo tipo de aceleradores pero solo para las construcciones de este dia, os daran puntos por dos: Finalizar construccion y por gastar aceleradores)",
+
+      "Camiones UR (Los MARTES solo se pondran camiones de nivel UR para que puntue bien en el vs)",
+
+      "Tareas secretas (Los MARTES solo se cogeran tareas secretas de nivel UR) (si os quedais sin tickets avisarnos)",
+
+      "Reclutamiento de supervivientes (Guardar tickets de reclutamientos, para que los MARTES utiliceis los de supervivientes eso hara que ganeis puntos)"
     ]
   },
 
   3: {
-    title: "Miércoles - Investigación",
+    title: "Miércoles",
     tasks: [
-      "Guardar tareas de radar un día antes",
-      "Investigar todo lo posible",
-      "Usar aceleradores de investigación",
-      "Abrir todos los cofres de complementos de dron",
-      "Volver a guardar cofres al terminar el miércoles"
+      "Tareas de radar (Guardar las tareas un dia antes)",
+
+      "Investigaciones (Investigar todo lo posible el dia MIERCOLES , para que puntue todo)",
+
+      "Aceleradores de investigación (Usar todo tipo de aceleradores de investigación solo para los MIERCOLES)",
+
+      "Abrir los cofres de complementos de dron (Para todo el MIERCOLES abrir todo esos cofres no guardéis ninguno pero solo para el MIERCOLES una vez termine el Miércoles, volver a guardar todos)"
     ]
   },
 
   4: {
-    title: "Jueves - Héroes",
+    title: "Jueves",
     tasks: [
-      "Usar tickets de reclutamiento de héroes",
-      "Gastar experiencia de héroes",
-      "Gastar fragmentos de héroes",
-      "Subir Kimberly a 5 estrellas si aún no está"
+      "Reclutamiento de Heroes (Guardar tickets de reclutamientos, para que los JUEVES utiliceis los de heroes eso hara que ganeis puntos)",
+
+      "Gastar experiencia Heroe (Gastar todas las experiencia de héroes. Se consigue atacando dooms, zombies o haciendo las pruebas de los héroes)",
+
+      "Gastar todos los fragmentos de los héroes (si no teneis a kim a 5 estrellas SUBIRLA A TOPE)"
     ]
   },
 
   5: {
-    title: "Viernes - Power Day",
+    title: "Viernes",
     tasks: [
-      "Guardar tareas de radar un día antes",
-      "Guardar construcciones terminadas para reclamar hoy",
-      "Investigar todo lo posible",
-      "Usar aceleradores de construcción",
-      "Usar aceleradores de investigación",
-      "Reclutar tropas y acelerarlas"
+      "Tareas de radar (Guardar las tareas un dia antes)",
+
+      "Construcción (Intentar guardar construcciones sin abrir el regalo una vez haya terminado y abrir los regalos los VIERNES, eso hara que sume puntos)",
+
+      "Investigaciones (Investigar todo lo posible el dia VIERNES , para que puntue todo)",
+
+      "Aceleradores construccion (usar todo tipo de aceleradores pero solo para las construcciones de este dia, os daran puntos por dos: Finalizar construccion y por gastar aceleradores)",
+
+      "Aceleradores de investigación (Usar todo tipo de aceleradores de investigación para el VIERNES)",
+
+      "Reclutar tropas y Acelerarlas (Usar todos los aceleradores posibles para conseguir el máximo de tropas el VIERNES, eso hará que ganéis la mayoría de puntos)"
     ]
   },
 
   6: {
-    title: "Sábado - Guerra",
+    title: "Sábado",
     tasks: [
-      "Usar aceleradores de construcción",
-      "Usar aceleradores de investigación",
-      "Acelerar tropas",
-      "Usar camiones UR",
-      "Aceptar solo tareas secretas UR",
-      "SI NO VAS A ATACAR A LAS 04:00 A.M, PONER ESCUDO",
-      "Atacar enemigos para conseguir puntos VS",
-      "Cuanto mejores tropas tenga el enemigo, más puntos dará"
+      "Aceleradores construccion (usar todo tipo de aceleradores pero solo para las construcciones de este dia, os daran puntos por gastar aceleradores)",
+
+      "Aceleradores de investigación (Usar todo tipo de aceleradores de investigación para el SABADO)",
+
+      "Acelerar tropas (Usar todos los aceleradores posibles para conseguir el máximo de tropas el SABADO, eso hará que ganéis la mayoría de puntos)",
+
+      "Camiones UR (Los SABADOS solo se pondran camiones de nivel UR para que puntue bien en el vs)",
+
+      "Tareas secretas (Los MARTES solo se cogeran tareas secretas de nivel UR) (si os quedais sin tickets avisarnos)",
+
+      "SI NO VAIS ATACAR A LAS 04:00 A.M, TODO EL MUNDO SE PONE ESCUDO",
+
+      "Cada muerte de soldados enemigos os darán puntos (esos puntos cuanto mejor tropas tenga el enemigo mas puntos dará)",
+
+      "CASTIGO: Todo el que no tenga escudo será revisado por los R4/R5 y podrá ser expulsado"
     ]
   }
 
 }
-
 let selectedDay = new Date().getDay()
 
 function renderDay() {
