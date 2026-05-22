@@ -11,72 +11,90 @@ const days = [
   "Martes",
   "Miércoles",
   "Jueves",
-  "Viernes",
-  "Sábado"
-]
-
-const dailyEvents = {
+  "viernes",
+  "Sabado"
+  ];
+  
+  const dailyEvents = {
 
   0: {
-    title: "Domingo de preparación",
+    title: "Domingo - Preparación",
     tasks: [
-      "Guardar stamina",
-      "Preparar mejoras",
-      "Ayudar alianza"
+      "Guardar recursos para el VS",
+      "Preparar construcciones",
+      "Preparar investigaciones",
+      "Guardar aceleradores",
+      "Coordinar estrategias con la alianza"
     ]
   },
 
   1: {
-    title: "Vs Construcción",
+    title: "Lunes - Drone & Radar",
     tasks: [
-      "Usar aceleradores",
-      "Mejorar edificios",
-      "Guardar radar"
+      "Tareas de radar (Guardar las tareas un día antes)",
+      "Gastar energía atacando dooms o zombies",
+      "Recolectar oro, hierro o madera",
+      "Subir nivel del dron",
+      "Abrir cofres de chip de dron",
+      "NO abrir cofres de complementos de dron"
     ]
   },
 
   2: {
-    title: "Vs Investigación",
+    title: "Martes - Construcción",
     tasks: [
-      "Mejorar research",
-      "Usar speedups",
-      "Subir tecnología"
+      "Guardar construcciones terminadas para reclamar hoy",
+      "Usar aceleradores de construcción",
+      "Usar camiones UR",
+      "Aceptar solo tareas secretas UR",
+      "Usar tickets de reclutamiento de supervivientes"
     ]
   },
 
   3: {
-    title: "Vs Drone",
+    title: "Miércoles - Investigación",
     tasks: [
-      "Subir drone",
-      "Usar componentes",
-      "Mejorar gear"
+      "Guardar tareas de radar un día antes",
+      "Investigar todo lo posible",
+      "Usar aceleradores de investigación",
+      "Abrir todos los cofres de complementos de dron",
+      "Volver a guardar cofres al terminar el miércoles"
     ]
   },
 
   4: {
-    title: "Vs Héroes",
+    title: "Jueves - Héroes",
     tasks: [
-      "Abrir cartas",
-      "Subir experiencia",
-      "Usar fragmentos"
+      "Usar tickets de reclutamiento de héroes",
+      "Gastar experiencia de héroes",
+      "Gastar fragmentos de héroes",
+      "Subir Kimberly a 5 estrellas si aún no está"
     ]
   },
 
   5: {
-    title: "Vs Radar",
+    title: "Viernes - Power Day",
     tasks: [
-      "Completar radar",
-      "Hacer rallies",
-      "Farmear recursos"
+      "Guardar tareas de radar un día antes",
+      "Guardar construcciones terminadas para reclamar hoy",
+      "Investigar todo lo posible",
+      "Usar aceleradores de construcción",
+      "Usar aceleradores de investigación",
+      "Reclutar tropas y acelerarlas"
     ]
   },
 
   6: {
-    title: "Vs Guerra",
+    title: "Sábado - Guerra",
     tasks: [
-      "Preparar tropas",
-      "Curar unidades",
-      "Participar en guerra"
+      "Usar aceleradores de construcción",
+      "Usar aceleradores de investigación",
+      "Acelerar tropas",
+      "Usar camiones UR",
+      "Aceptar solo tareas secretas UR",
+      "SI NO VAS A ATACAR A LAS 04:00 A.M, PONER ESCUDO",
+      "Atacar enemigos para conseguir puntos VS",
+      "Cuanto mejores tropas tenga el enemigo, más puntos dará"
     ]
   }
 
