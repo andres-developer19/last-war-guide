@@ -140,3 +140,13 @@ nextDayBtn.addEventListener("click", () => {
 })
 
 renderDay()
+
+
+fetch('https://api.ejemplo.com/datos')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
