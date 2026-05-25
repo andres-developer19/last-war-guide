@@ -179,7 +179,7 @@ nextDayBtn.addEventListener("click", () => {
 renderDay()
 
 
-fetch('https://api.ejemplo.com/datos')
+fetch('https://api.chucknorris.io/')
   .then(response => response.json())
   .then(data => {
     console.log(data);
