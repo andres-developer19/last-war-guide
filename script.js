@@ -178,12 +178,13 @@ nextDayBtn.addEventListener("click", () => {
 
 renderDay()
 
+async function cargarDatos() {
+    try {
+        const datos = await apiRequest("/players");
+        console.log(datos);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-fetch('https://api.chucknorris.io/')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+cargarDatos();
