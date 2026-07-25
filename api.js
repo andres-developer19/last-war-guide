@@ -11,6 +11,21 @@ async function apiRequest(endpoint) {
     if (!response.ok) {
         throw new Error(`Error ${response.status}`);
     }
+    else {
+console.log("API request successful te pica ese culo");
+    }
 
     return response.json();
+}
+
+
+// pages/api/lwatlas.js  (o app/api/lwatlas/route.js si usas App Router)
+export default async function handler(req, res) {
+  const response = await fetch('https://api.lwatlas.com/v1/', {
+    headers: {
+      'X-Api-Key': process.env.API_KEY
+    }
+  });
+  const data = await response.json();
+  res.status(response.status).json(data);
 }

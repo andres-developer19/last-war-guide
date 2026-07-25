@@ -178,9 +178,19 @@ nextDayBtn.addEventListener("click", () => {
 
 renderDay()
 
+async function apiRequest(ruta) {
+    const respuesta = await fetch(`http://localhost:3000/api/lwatlas/${ruta}`);
+
+    if (!respuesta.ok) {
+        throw new Error(`Error en la petición: ${respuesta.status}`);
+    }
+
+    return await respuesta.json();
+}
+
 async function cargarDatos() {
     try {
-        const datos = await apiRequest("");
+        const datos = await apiRequest(""); // aquí pones la ruta, ej: "players"
         console.log(datos);
     } catch (error) {
         console.error(error);
