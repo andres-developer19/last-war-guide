@@ -180,7 +180,7 @@ renderDay()
 
 async function cargarDatos() {
     try {
-        const datos = await apiRequest("/players");
+        const datos = await apiRequest("");
         console.log(datos);
     } catch (error) {
         console.error(error);
