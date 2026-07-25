@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-const API_KEY = 'lwa_live_Wgb9W91NnQZTHtYe3KPbKmCoA6yLwyEM';
+const API_KEY = 'lwa_live_ubkzXLe4SEFkCW3Rnwfu_M-hB3p2E6yW';
 
 app.use(cors());
 
@@ -22,7 +22,10 @@ app.get('/api/lwatlas/*path', (req, res) => {
 });
 
 async function explorar(path, req, res) {
-  const targetUrl = `https://api.lwatlas.com/v1/${path}`;
+  // Reenviamos también los query params que venían en la petición del navegador
+  // (ej: ?allianceName=SUN), porque los endpoints reales de LWAtlas los necesitan.
+  const queryString = new URLSearchParams(req.query).toString();
+  const targetUrl = `https://api.lwatlas.com/v1/${path}${queryString ? `?${queryString}` : ''}`;
   console.log('--- Llamando a:', targetUrl);
 
   try {
@@ -32,7 +35,7 @@ async function explorar(path, req, res) {
       }
     });
 
-    const textoCrudo = await response.text(); // leemos como texto SIEMPRE, sea o no JSON
+    const textoCrudo = await response.text();
     console.log('Status recibido:', response.status);
     console.log('Cuerpo recibido:', textoCrudo);
 
