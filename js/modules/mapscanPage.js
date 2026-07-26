@@ -1,5 +1,5 @@
-import { escanearWarzone } from "./modules/mapscan.js";
-import { generarDatosPrueba } from "./modules/mapscanSampleData.js";
+import { escanearWarzone } from "./mapscan.js";
+import { generarDatosPrueba } from "./mapscanSampleData.js";
 import { WARZONE } from "./config.js";
 
 const botonBuscar = document.getElementById("scan-btn-buscar");
