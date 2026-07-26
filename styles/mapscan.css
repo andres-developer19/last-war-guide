@@ -215,3 +215,51 @@ body {
   padding: 0.4rem 0.7rem;
   margin-bottom: 0.6rem;
 }
+
+/* --- Tarjetas de objetivos (vigente / expirada) --- */
+
+.scan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.scan-card.is-vigente {
+  border-color: var(--scan-radio-green);
+}
+
+.scan-card.is-expirada {
+  opacity: 0.55;
+}
+
+.scan-card-coord {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.scan-copy-btn {
+  background: transparent;
+  border: 1px solid var(--scan-border);
+  color: var(--scan-text-muted);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.68rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.scan-copy-btn:hover {
+  border-color: var(--scan-accent);
+  color: var(--scan-accent);
+}
+
+.scan-card-vence.is-vigente {
+  color: var(--scan-radio-green);
+}
+
+.scan-card-vence.is-expirada {
+  color: var(--scan-text-muted);
+}
