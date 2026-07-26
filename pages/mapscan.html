@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map Scan — Last War Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mapscan.css">
+</head>
+<body>
+
+<section class="scan-section">
+
+    <div class="scan-header">
+        <div>
+            <span class="scan-eyebrow">Map Scan · Warzone</span>
+            <h2>Objetivos del mapa</h2>
+        </div>
+        <a href="index.html" class="scan-volver">&larr; Volver a la guía</a>
+    </div>
+
+    <div class="scan-tabs">
+        <button class="scan-tab is-active" data-filter="secret_tasks">Tareas secretas</button>
+        <button class="scan-tab" data-filter="player_bases">Bases de jugadores</button>
+    </div>
+
+    <div class="scan-toolbar">
+        <button id="scan-btn-buscar" class="scan-btn-primary">Buscar objetivos</button>
+        <span id="scan-estado" class="scan-estado">Sin escanear todavía.</span>
+    </div>
+
+    <div id="scan-resumen" class="scan-resumen"></div>
+
+    <div id="scan-resultados" class="scan-grid"></div>
+
+</section>
+
+<script type="module" src="js/mapscanPage.js"></script>
+</body>
+</html>
