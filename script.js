@@ -1,351 +1,111 @@
-const eventTitle = document.getElementById("event-title")
-const tasksContainer = document.getElementById("tasks-container")
-const dayText = document.getElementById("day-text")
 
-const prevDayBtn = document.getElementById("prev-day")
-const nextDayBtn = document.getElementById("next-day")
 
-const days = [
-  "Domingo",
-  "Lunes",
-  "Martes",
-  "Miércoles",
-  "Jueves",
-  "viernes",
-  "Sabado"
-  ];
-  
-  const dailyEvents = {
+// --- Prueba: Map Scan de tareas secretas ---
 
-  0: {
-    title: "Domingo",
-    tasks: [
-      "Preparar recursos para el VS",
-      "Guardar aceleradores",
-      "Coordinar estrategias con la alianza"
-    ]
-  },
+async function probarMapScan() {
+    const warzone = 2296; // la warzone de tu alianza CVeN
 
-  1: {
-    title: "Lunes",
-    tasks: [
-      "Tareas de radar (Guardar las tareas un dia antes)",
+    try {
+        console.log("Creando job de Map Scan...");
+        const respuesta = await fetch("http://localhost:3000/api/lwatlas/map-scan/jobs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ warzone, filter: "secret_tasks" })
+        });
 
-      "Gastar energia (Atacando dooms o bien zombies)",
+        const textoCrudo = await respuesta.text();
+        console.log("Status:", respuesta.status);
+        console.log("Respuesta cruda:", textoCrudo);
 
-      "Recolectando oro, hierro o madera (Dejarlo la noche de antes. y si estais trabajando mientras esteis en horario de trabajo dejar recolectando igual)",
+        if (!respuesta.ok) {
+            console.error("El job no se pudo crear. Revisa el mensaje de error de arriba — probablemente liste los valores válidos de 'filter'.");
+            return;
+        }
 
-      "Subir de nivel del dron (Solo subimos el nivel del dron y si nos pide piezas de dron, nos dara mas puntos)",
+        const job = JSON.parse(textoCrudo);
+        console.log("Job creado:", job);
 
-      "Abrir los cofres de chip de dron (Los cofres de CHIPS son los que si tenemos que abrir, TENER CUIDADO NO SON LOS COFRES DE COMPLEMENTOS DE DRON)"
-    ]
-  },
-
-  2: {
-    title: "Martes",
-    tasks: [
-      "Construccion (Intentar guardar construcciones sin abrir el regalo una vez haya terminado y abrir los regalos los MARTES, eso hara que sume puntos)",
-
-      "Aceleradores construccion (usar todo tipo de aceleradores pero solo para las construcciones de este dia, os daran puntos por dos: Finalizar construccion y por gastar aceleradores)",
-
-      "Camiones UR (Los MARTES solo se pondran camiones de nivel UR para que puntue bien en el vs)",
-
-      "Tareas secretas (Los MARTES solo se cogeran tareas secretas de nivel UR) (si os quedais sin tickets avisarnos)",
-
-      "Reclutamiento de supervivientes (Guardar tickets de reclutamientos, para que los MARTES utiliceis los de supervivientes eso hara que ganeis puntos)"
-    ]
-  },
-
-  3: {
-    title: "Miércoles",
-    tasks: [
-      "Tareas de radar (Guardar las tareas un dia antes)",
-
-      "Investigaciones (Investigar todo lo posible el dia MIERCOLES , para que puntue todo)",
-
-      "Aceleradores de investigación (Usar todo tipo de aceleradores de investigación solo para los MIERCOLES)",
-
-      "Abrir los cofres de complementos de dron (Para todo el MIERCOLES abrir todo esos cofres no guardéis ninguno pero solo para el MIERCOLES una vez termine el Miércoles, volver a guardar todos)"
-    ]
-  },
-
-  4: {
-    title: "Jueves",
-    tasks: [
-      "Reclutamiento de Heroes (Guardar tickets de reclutamientos, para que los JUEVES utiliceis los de heroes eso hara que ganeis puntos)",
-
-      "Gastar experiencia Heroe (Gastar todas las experiencia de héroes. Se consigue atacando dooms, zombies o haciendo las pruebas de los héroes)",
-
-      "Gastar todos los fragmentos de los héroes (si no teneis a kim a 5 estrellas SUBIRLA A TOPE)"
-    ]
-  },
-
-  5: {
-    title: "Viernes",
-    tasks: [
-      "Tareas de radar (Guardar las tareas un dia antes)",
-
-      "Construcción (Intentar guardar construcciones sin abrir el regalo una vez haya terminado y abrir los regalos los VIERNES, eso hara que sume puntos)",
-
-      "Investigaciones (Investigar todo lo posible el dia VIERNES , para que puntue todo)",
-
-      "Aceleradores construccion (usar todo tipo de aceleradores pero solo para las construcciones de este dia, os daran puntos por dos: Finalizar construccion y por gastar aceleradores)",
-
-      "Aceleradores de investigación (Usar todo tipo de aceleradores de investigación para el VIERNES)",
-
-      "Reclutar tropas y Acelerarlas (Usar todos los aceleradores posibles para conseguir el máximo de tropas el VIERNES, eso hará que ganéis la mayoría de puntos)"
-    ]
-  },
-
-  6: {
-    title: "Sábado",
-    tasks: [
-      "Aceleradores construccion (usar todo tipo de aceleradores pero solo para las construcciones de este dia, os daran puntos por gastar aceleradores)",
-
-      "Aceleradores de investigación (Usar todo tipo de aceleradores de investigación para el SABADO)",
-
-      "Acelerar tropas (Usar todos los aceleradores posibles para conseguir el máximo de tropas el SABADO, eso hará que ganéis la mayoría de puntos)",
-
-      "Camiones UR (Los SABADOS solo se pondran camiones de nivel UR para que puntue bien en el vs)",
-
-      "Tareas secretas (Los MARTES solo se cogeran tareas secretas de nivel UR) (si os quedais sin tickets avisarnos)",
-
-      "SI NO VAIS ATACAR A LAS 04:00 A.M, TODO EL MUNDO SE PONE ESCUDO",
-
-      "Cada muerte de soldados enemigos os darán puntos (esos puntos cuanto mejor tropas tenga el enemigo mas puntos dará)",
-
-      "CASTIGO: Todo el que no tenga escudo será revisado por los R4/R5 y podrá ser expulsado"
-    ]
-  }
-
-}
-let selectedDay = new Date().getDay()
-
-function renderDay() {
-
-  const currentEvent = dailyEvents[selectedDay]
-
-  dayText.textContent = `Hoy estás viendo: ${days[selectedDay]}`
-
-  tasksContainer.innerHTML = ""
-
-  if (currentEvent) {
-
-    eventTitle.textContent = currentEvent.title
-
-    currentEvent.tasks.forEach(task => {
-
-      const taskElement = document.createElement("label")
-
-      taskElement.classList.add("task")
-
-      taskElement.innerHTML = `
-        <input type="checkbox">
-        <span>${task}</span>
-      `
-
-      tasksContainer.appendChild(taskElement)
-
-    })
-
-  }
-
+        if (job.status === "READY") {
+            await descargarResultadosJob(job.jobId);
+        }
+    } catch (error) {
+        console.error("Error al probar Map Scan:", error);
+    }
 }
 
-prevDayBtn.addEventListener("click", () => {
+async function descargarResultadosJob(jobId) {
+    console.log(`Descargando resultados del job ${jobId}...`);
 
-  selectedDay--
-
-  if (selectedDay < 0) {
-    selectedDay = 6
-  }
-
-  renderDay()
-
-})
-
-nextDayBtn.addEventListener("click", () => {
-
-  selectedDay++
-
-  if (selectedDay > 6) {
-    selectedDay = 0
-  }
-
-  renderDay()
-
-})
-
-renderDay()
-
-async function apiRequest(ruta) {
-    // Si ruta está vacía, no añadimos la barra al final
-    const url = ruta
-        ? `http://localhost:3000/api/lwatlas/${ruta}`
-        : `http://localhost:3000/api/lwatlas`;
-
-    const respuesta = await fetch(url);
-
-    // Leemos como texto primero, por si el servidor no devuelve JSON válido
+    const respuesta = await fetch(`http://localhost:3000/api/lwatlas/map-scan/jobs/${jobId}/download`);
     const textoCrudo = await respuesta.text();
 
     if (!respuesta.ok) {
-        throw new Error(`Error en la petición: ${respuesta.status} - ${textoCrudo}`);
-    }
-
-    try {
-        return JSON.parse(textoCrudo);
-    } catch {
-        return textoCrudo; // devolvemos el texto tal cual si no es JSON
-    }
-}
-
-async function cargarDatos() {
-    const allianceId = "46f4c56a22984addbfa862973c8a7fa4";
-    const contenedor = document.getElementById("roster-grid");
-    const contador = document.getElementById("roster-count");
-
-    try {
-        const datos = await apiRequest(`alliances/${allianceId}/members`);
-        console.log("Miembros de la alianza:", datos);
-
-        // La API puede devolver el arreglo directo o envuelto en { members: [...] }
-        const miembros = Array.isArray(datos) ? datos : (datos.members || []);
-
-        renderMiembros(miembros, contenedor, contador);
-    } catch (error) {
-        console.error("Error al cargar miembros:", error);
-        if (contenedor) {
-            contenedor.innerHTML = `<div class="roster-error">No se pudo cargar el roster: ${error.message}</div>`;
-        }
-    }
-}
-
-function renderMiembros(miembros, contenedor, contador) {
-    if (!contenedor) return;
-
-    if (contador) {
-        contador.textContent = `${miembros.length} miembros`;
-    }
-
-    if (miembros.length === 0) {
-        contenedor.innerHTML = `<div class="roster-empty">Ningún miembro encontrado.</div>`;
+        console.error("Error al descargar:", textoCrudo);
         return;
     }
 
-    // Ordenamos por poder descendente si el campo existe
-    const ordenados = [...miembros].sort((a, b) => (b.power || 0) - (a.power || 0));
+    // NDJSON: una línea = un objeto JSON.
+    // Si la conexión se cortó justo a media línea, esa última línea puede estar
+    // incompleta — la ignoramos en vez de que rompa todo el parseo.
+    const lineas = textoCrudo.split("\n").filter(linea => linea.trim() !== "");
+    const filas = [];
+    let lineasCorruptas = 0;
 
-    contenedor.innerHTML = ordenados.map((m, i) => {
-        const nombre = m.name || m.playerName || m.username || "Sin nombre";
-        const poder = m.power ? formatearNumero(m.power) : "—";
-        const warzone = m.warzoneName || (m.warzoneId ? `Warzone ${m.warzoneId}` : "—");
-        const uid = m.playerId || m.uid || m.id || "";
+    for (const linea of lineas) {
+        try {
+            filas.push(JSON.parse(linea));
+        } catch {
+            lineasCorruptas++;
+        }
+    }
 
-        return `
-            <div class="roster-tag" data-uid="${uid}" data-nombre="${nombre}">
-                <div class="roster-rank">#${i + 1}</div>
-                <div class="roster-name" title="${nombre}">${nombre}</div>
-                <div class="roster-stats">
-                    <span>${warzone}</span>
-                    <span class="roster-power">${poder}</span>
-                </div>
-            </div>
-        `;
-    }).join("");
+    if (lineasCorruptas > 0) {
+        console.warn(`${lineasCorruptas} línea(s) no se pudieron parsear (probablemente el corte final).`);
+    }
 
-    // Click en cualquier placa abre el modal de detalle
-    contenedor.querySelectorAll(".roster-tag").forEach(tag => {
-        tag.addEventListener("click", () => {
-            const uid = tag.dataset.uid;
-            const nombre = tag.dataset.nombre;
-            if (uid) {
-                abrirModalJugador(uid, nombre);
-            }
-        });
+    console.log(`Se descargaron ${filas.length} tareas secretas.`);
+
+    // Agrupamos por cfg_id para identificar cuáles corresponden a qué tipo/rareza.
+    // No sabemos aún el mapeo cfg_id -> nombre/UR, así que mostramos el conteo
+    // de cada uno para que puedas identificarlos por tu conocimiento del juego.
+    const conteoPorTipo = {};
+    filas.forEach(f => {
+        conteoPorTipo[f.cfg_id] = (conteoPorTipo[f.cfg_id] || 0) + 1;
     });
+
+    console.log("Tipos de tarea encontrados (cfg_id: cantidad):");
+    console.log(JSON.stringify(conteoPorTipo, null, 2));
+
+    // HIPÓTESIS (sin confirmar): los últimos 2 dígitos del cfg_id podrían
+    // indicar la rareza -> 01=R, 02=SR, 03=SSR, 04=UR.
+    // Descomenta esto solo después de confirmar en el juego que un cfg_id
+    // terminado en 04 es efectivamente UR.
+    /*
+    const soloUR = filas.filter(f => f.cfg_id % 100 === 4);
+    console.log(`Tareas presuntamente UR: ${soloUR.length}`, soloUR);
+    */
+    console.log("Primeras 5 (copia este bloque completo):");
+    console.log(JSON.stringify(filas.slice(0, 5), null, 2));
 }
 
-// --- Modal de detalle de jugador ---
+probarMapScan();
 
-async function abrirModalJugador(uid, nombre) {
-    const backdrop = document.createElement("div");
-    backdrop.className = "roster-modal-backdrop";
-    backdrop.innerHTML = `
-        <div class="roster-modal">
-            <button class="roster-modal-close" aria-label="Cerrar">&times;</button>
-            <span class="roster-modal-eyebrow">Ficha de jugador</span>
-            <h3>${nombre}</h3>
-            <div class="roster-modal-loading">Cargando datos...</div>
-        </div>
-    `;
-    document.body.appendChild(backdrop);
+// --- Verificar vigencia de los datos ---
 
-    const cerrar = () => backdrop.remove();
-    backdrop.querySelector(".roster-modal-close").addEventListener("click", cerrar);
-    backdrop.addEventListener("click", (e) => {
-        if (e.target === backdrop) cerrar();
-    });
-
-    const cuerpo = backdrop.querySelector(".roster-modal");
-
+async function verVigenciaWarzone() {
     try {
-        const [historial, escuadrones] = await Promise.allSettled([
-            apiRequest(`players/${uid}/history`),
-            apiRequest(`players/${uid}/squads`)
-        ]);
+        const datos = await apiRequest("warzones");
+        const miWarzone = (Array.isArray(datos) ? datos : datos.warzones || [])
+            .find(w => w.warzoneId === 2296);
 
-        let html = `
-            <button class="roster-modal-close" aria-label="Cerrar">&times;</button>
-            <span class="roster-modal-eyebrow">Ficha de jugador</span>
-            <h3>${nombre}</h3>
-        `;
-
-        html += `<div class="roster-modal-section">
-            <h4>Historial</h4>
-            ${historial.status === "fulfilled"
-                ? `<pre>${JSON.stringify(historial.value, null, 2)}</pre>`
-                : `<div class="roster-modal-error">No se pudo cargar: ${historial.reason.message}</div>`}
-        </div>`;
-
-        html += `<div class="roster-modal-section">
-            <h4>Escuadrones</h4>
-            ${escuadrones.status === "fulfilled"
-                ? `<pre>${JSON.stringify(escuadrones.value, null, 2)}</pre>`
-                : `<div class="roster-modal-error">No se pudo cargar: ${escuadrones.reason.message}</div>`}
-        </div>`;
-
-        cuerpo.innerHTML = html;
-        cuerpo.querySelector(".roster-modal-close").addEventListener("click", cerrar);
+        if (miWarzone) {
+            console.log("Vigencia de tu warzone:", miWarzone);
+        } else {
+            console.log("Todas las warzones:", datos);
+        }
     } catch (error) {
-        cuerpo.innerHTML = `
-            <button class="roster-modal-close" aria-label="Cerrar">&times;</button>
-            <span class="roster-modal-eyebrow">Ficha de jugador</span>
-            <h3>${nombre}</h3>
-            <div class="roster-modal-error">Error al cargar la ficha: ${error.message}</div>
-        `;
-        cuerpo.querySelector(".roster-modal-close").addEventListener("click", cerrar);
+        console.error("Error consultando /warzones:", error);
     }
 }
 
-function formatearNumero(num) {
-    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
-    if (num >= 1_000) return (num / 1_000).toFixed(1) + "K";
-    return num.toString();
-}
-
-// Filtro en vivo por nombre
-document.addEventListener("DOMContentLoaded", () => {
-    const buscador = document.getElementById("roster-search-input");
-    if (buscador) {
-        buscador.addEventListener("input", (e) => {
-            const filtro = e.target.value.toLowerCase();
-            document.querySelectorAll("#roster-grid .roster-tag").forEach(tag => {
-                const nombre = tag.querySelector(".roster-name").textContent.toLowerCase();
-                tag.style.display = nombre.includes(filtro) ? "" : "none";
-            });
-        });
-    }
-});
-
-cargarDatos();
+verVigenciaWarzone();
