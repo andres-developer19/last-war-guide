@@ -116,9 +116,15 @@ function renderCards(filas) {
     const conEstado = filas.map(f => ({ ...f, _estado: calcularEstadoTiempo(f.act_end_time) }));
 
     conEstado.sort((a, b) => {
+        // 1º criterio: cfg_id de mayor a menor
+        if (b.cfg_id !== a.cfg_id) {
+            return b.cfg_id - a.cfg_id;
+        }
+        // 2º criterio (empate en cfg_id): vigentes primero
         if (a._estado.vigente !== b._estado.vigente) {
             return a._estado.vigente ? -1 : 1;
         }
+        // 3º criterio: las que vencen más pronto, primero
         return (a.act_end_time || 0) - (b.act_end_time || 0);
     });
 
