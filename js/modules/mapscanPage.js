@@ -1,6 +1,6 @@
 import { escanearWarzone } from "./mapscan.js";
 import { generarDatosPrueba } from "./mapscanSampleData.js";
-import { WARZONE } from "./config.js";
+import { WARZONE } from "../config.js";
 
 const botonBuscar = document.getElementById("scan-btn-buscar");
 const modoPruebaCheckbox = document.getElementById("scan-modo-prueba");
