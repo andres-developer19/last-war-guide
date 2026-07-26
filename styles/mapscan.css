@@ -174,3 +174,44 @@ body {
 }
 
 .scan-error { color: var(--scan-danger); border-color: #6b3535; }
+
+.scan-raw-info {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--scan-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.scan-raw {
+  background: var(--scan-bg-panel);
+  border: 1px solid var(--scan-border);
+  padding: 1rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.78rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.scan-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--scan-text-muted);
+  cursor: pointer;
+}
+
+.scan-modo-prueba-badge {
+  display: inline-block;
+  background: rgba(217, 112, 111, 0.15);
+  border: 1px solid var(--scan-danger);
+  color: var(--scan-danger);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  margin-bottom: 0.6rem;
+}

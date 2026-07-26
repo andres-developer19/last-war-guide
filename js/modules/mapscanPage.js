@@ -1,6 +1,8 @@
-import { escanearWarzone } from "./mapscan.js";
+import { escanearWarzone } from "./modules/mapscan.js";
+import { generarDatosPrueba } from "./modules/mapscanSampleData.js";
 
 const botonBuscar = document.getElementById("scan-btn-buscar");
+const modoPruebaCheckbox = document.getElementById("scan-modo-prueba");
 const estadoEl = document.getElementById("scan-estado");
 const resumenEl = document.getElementById("scan-resumen");
 const resultadosEl = document.getElementById("scan-resultados");
@@ -14,7 +16,7 @@ tabs.forEach(tab => {
         tab.classList.add("is-active");
         filtroActual = tab.dataset.filter;
         resultadosEl.innerHTML = "";
-        resumenEl.textContent = "";
+        resumenEl.innerHTML = "";
         estadoEl.textContent = "Sin escanear todavía.";
     });
 });
@@ -22,17 +24,33 @@ tabs.forEach(tab => {
 botonBuscar.addEventListener("click", buscarObjetivos);
 
 async function buscarObjetivos() {
+    const usarDatosPrueba = modoPruebaCheckbox.checked;
+
+    if (usarDatosPrueba && filtroActual !== "secret_tasks") {
+        resultadosEl.innerHTML = `<div class="scan-error">Todavía no hay datos de ejemplo para "player_bases" — desmarca "datos de ejemplo" para probar con la API real, o cambia a la pestaña "Tareas secretas".</div>`;
+        return;
+    }
+
     botonBuscar.disabled = true;
-    estadoEl.textContent = "Escaneando...";
+    estadoEl.textContent = usarDatosPrueba
+        ? "Cargando datos de ejemplo..."
+        : "Escaneando (gasta 1 de tu cuota)...";
     resultadosEl.innerHTML = "";
-    resumenEl.textContent = "";
+    resumenEl.innerHTML = "";
 
     try {
-        const filas = await escanearWarzone(filtroActual);
-        estadoEl.textContent = `Última búsqueda: ${new Date().toLocaleTimeString()}`;
-        resumenEl.textContent = `${filas.length} filas recibidas (filtro: ${filtroActual})`;
+        const filas = usarDatosPrueba
+            ? generarDatosPrueba()
+            : await escanearWarzone(filtroActual);
 
-        console.log(`Datos crudos de "${filtroActual}":`, filas);
+        estadoEl.textContent = `Última carga: ${new Date().toLocaleTimeString()}`;
+
+        resumenEl.innerHTML = usarDatosPrueba
+            ? `<div class="scan-modo-prueba-badge">⚠ MODO PRUEBA — estos datos NO son reales, son de ejemplo</div>
+               <div>${filas.length} filas de ejemplo (filtro: ${filtroActual})</div>`
+            : `<div>${filas.length} filas recibidas (filtro: ${filtroActual})</div>`;
+
+        console.log(`Datos ${usarDatosPrueba ? "de EJEMPLO" : "REALES"} de "${filtroActual}":`, filas);
 
         renderCrudo(filas);
     } catch (error) {
@@ -44,7 +62,6 @@ async function buscarObjetivos() {
     }
 }
 
-// Muestra los datos tal cual vienen, sin suponer nada sobre su significado.
 function renderCrudo(filas) {
     if (filas.length === 0) {
         resultadosEl.innerHTML = `<div class="scan-empty">Sin resultados.</div>`;
