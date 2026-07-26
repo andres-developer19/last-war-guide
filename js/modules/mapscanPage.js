@@ -1,4 +1,4 @@
-import { escanearWarzone } from "./modules/mapscan.js";
+import { escanearWarzone } from "./mapscan.js";
 
 const botonBuscar = document.getElementById("scan-btn-buscar");
 const estadoEl = document.getElementById("scan-estado");
