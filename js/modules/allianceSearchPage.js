@@ -1,4 +1,4 @@
-import { buscarAlianzas } from "./modules/alliances.js";
+import { buscarAlianzas } from "./alliances.js";
 
 const input = document.getElementById("as-input");
 const boton = document.getElementById("as-btn-buscar");
