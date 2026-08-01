@@ -5,7 +5,8 @@ const ENLACES = [
     { archivo: "index.html", texto: "Inicio" },
     { archivo: "allianceSearch.html", texto: "Buscar alianza" },
     { archivo: "mapscan.html", texto: "Map Scan" },
-    { archivo: "vs.html", texto: "VS" }
+    { archivo: "vs.html", texto: "VS" },
+    { archivo: "player.html", texto: "Player" }
 ];
 
 function paginaActual() {
