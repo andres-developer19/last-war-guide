@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roster de alianza — Last War Guide</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles/roster.css">
-<link rel="stylesheet" href="../nav.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roster — Last War Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="../styles/roster.css">
+  <link rel="stylesheet" href="../nav.css">
 </head>
 <body>
 
-<section class="roster-section">
+  <main class="page">
 
-    <div class="roster-header">
-        <div>
-            <span class="roster-eyebrow">Alianza · Warzone</span>
-            <h2 id="roster-title">Roster</h2>
+    <header class="page-hero">
+      <span class="page-eyebrow">Alianza · Roster</span>
+      <h1 class="page-title" id="roster-title">Roster de alianza</h1>
+      <p class="page-subtitle">Miembros ordenados por poder. Haz clic en un miembro para ver su detalle.</p>
+    </header>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="row-between" style="flex-wrap:wrap;gap:12px;">
+        <div class="row" style="flex-wrap:wrap;gap:12px;">
+          <input class="input" style="max-width:260px;" id="roster-search-input" placeholder="Buscar miembro por nombre...">
+          <select class="input" id="roster-sort" style="max-width:150px;" title="Ordenar por">
+            <option value="power-desc">Poder ↓</option>
+            <option value="power-asc">Poder ↑</option>
+            <option value="name">Nombre</option>
+            <option value="rank">Rango</option>
+          </select>
+          <button class="btn" id="roster-apply">Ordenar</button>
         </div>
-        <span class="roster-count" id="roster-count">— miembros</span>
-    </div>
-
-    <div class="roster-links">
-        <a href="index.html">&larr; Mi alianza</a>
-        <a href="allianceSearch.html">Buscar otra alianza</a>
-    </div>
-
-    <div class="roster-search">
-        <input type="text" id="roster-search-input" placeholder="Buscar miembro por nombre...">
+        <div class="row" style="gap:8px;">
+          <span class="badge badge-accent" id="roster-count">— miembros</span>
+          <a class="btn" href="allianceSearch.html">↩ Buscar otra alianza</a>
+        </div>
+      </div>
     </div>
 
     <div class="roster-grid" id="roster-grid"></div>
 
-</section>
-<script type="module" src="../js/navHeader.js"></script>
-<script type="module">
+  </main>
+
+  <footer class="footer">
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
+
+  <script type="module" src="../js/navHeader.js"></script>
+  <script type="module">
     import { cargarDatos, initBuscador } from "../js/modules/roster.js";
     cargarDatos();
     initBuscador();
-</script>
+  </script>
 </body>
 </html>

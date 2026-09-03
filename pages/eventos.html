@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eventos — Last War Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="../nav.css">
+</head>
+<body>
+
+  <main class="page">
+
+    <div class="session-banner warn" id="session-banner" style="display:none;">
+      <span>⚠️</span>
+      <span id="session-banner-text">Cargando estado de la sesión...</span>
+    </div>
+
+    <header class="page-hero">
+      <span class="page-eyebrow">Actividad</span>
+      <h1 class="page-title">Eventos y recompensas</h1>
+      <p class="page-subtitle">Correo del sistema (gifts), reclamar stamina, visitantes y recompensas inactivas.</p>
+    </header>
+
+    <div class="tabs" id="event-tabs">
+      <button class="tab is-active" data-tab="correo">📬 Correo del sistema</button>
+      <button class="tab" data-tab="acciones">⚡ Acciones</button>
+    </div>
+
+    <!-- Tab: Correo -->
+    <section id="tab-correo" class="stack">
+      <div class="row-between">
+        <div class="row">
+          <label class="card-muted" for="days">Últimos días</label>
+          <select id="mail-days" class="input" style="width:90px;">
+            <option value="3">3</option>
+            <option value="7" selected>7</option>
+            <option value="14">14</option>
+            <option value="30">30</option>
+          </select>
+          <button class="btn btn-primary" id="btn-mail">Cargar correo</button>
+        </div>
+      </div>
+      <div id="mail-body"><div class="loading"><span class="spinner"></span> Cargando correo...</div></div>
+    </section>
+
+    <!-- Tab: Acciones -->
+    <section id="tab-acciones" class="grid grid-3" style="display:none;">
+      <div class="card">
+        <h2 class="card-title"><span class="ico">⚡</span> Reclamar stamina</h2>
+        <p class="card-muted" style="margin-bottom:14px;">Reclama tu stamina diaria de la alianza.</p>
+        <button class="btn btn-primary btn-block" data-accion="stamina">Reclamar</button>
+      </div>
+      <div class="card">
+        <h2 class="card-title"><span class="ico">🚶</span> Recolectar visitantes</h2>
+        <p class="card-muted" style="margin-bottom:14px;">Recolecta los visitantes acumulados.</p>
+        <button class="btn btn-primary btn-block" data-accion="visitantes">Recolectar</button>
+      </div>
+      <div class="card">
+        <h2 class="card-title"><span class="ico">📦</span> Recompensas inactivas</h2>
+        <p class="card-muted" style="margin-bottom:14px;">Cobra recompensas por inactividad.</p>
+        <button class="btn btn-primary btn-block" data-accion="recompensas">Cobrar</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
+
+  <script type="module" src="../js/navHeader.js"></script>
+  <script type="module" src="../js/modules/eventosPage.js"></script>
+</body>
+</html>

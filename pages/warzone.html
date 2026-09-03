@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jugador — Last War Guide</title>
+  <title>Warzone — Last War Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,17 +14,23 @@
 
   <main class="page">
 
-    <a class="btn" style="margin-bottom:20px;" href="javascript:history.back()">← Volver</a>
+    <div class="session-banner warn" id="session-banner" style="display:none;">
+      <span>⚠️</span>
+      <span id="session-banner-text">Cargando estado de la sesión...</span>
+    </div>
 
     <header class="page-hero">
-      <span class="page-eyebrow">Jugador</span>
-      <h1 class="page-title" id="player-name">Cargando...</h1>
-      <p class="page-subtitle" id="player-subtitle"></p>
+      <span class="page-eyebrow">Warzone</span>
+      <h1 class="page-title">Estado de la warzone</h1>
+      <p class="page-subtitle">Estado actual de tu warzone y todas sus rondas.</p>
     </header>
 
-    <div class="card">
-      <h2 class="card-title"><span class="ico">👤</span> Información del jugador</h2>
-      <div id="player-content"><div class="loading"><span class="spinner"></span> Cargando información...</div></div>
+    <div class="stack">
+      <div class="row">
+        <button class="btn btn-primary" id="wz-btn">Cargar warzone</button>
+        <span class="badge badge-muted">requiere sesión</span>
+      </div>
+      <div id="wz-body"><div class="empty">Haz clic en "Cargar warzone".</div></div>
     </div>
 
   </main>
@@ -34,6 +40,6 @@
   </footer>
 
   <script type="module" src="../js/navHeader.js"></script>
-  <script type="module" src="../js/modules/playerPage.js"></script>
+  <script type="module" src="../js/modules/warzonePage.js"></script>
 </body>
 </html>

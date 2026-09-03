@@ -1,19 +1,28 @@
 {
-  "name": "guia_last_war",
+  "name": "last-war-guide",
   "version": "1.0.0",
-  "description": "",
-  "main": "api.js",
+  "description": "Última guía y herramientas para Last War: Survival. Frontend + proxy a la API de lastwar.tools.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andres-developer19/last-war-guide.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "last-war",
+    "survival",
+    "guia",
+    "lastwar-tools",
+    "api"
+  ],
+  "author": "andres-developer19",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/andres-developer19/last-war-guide/issues"
@@ -21,6 +30,7 @@
   "homepage": "https://github.com/andres-developer19/last-war-guide#readme",
   "dependencies": {
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1"
   }
 }

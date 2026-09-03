@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar — Last War Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="../nav.css">
+</head>
+<body>
+
+  <main class="page">
+
+    <header class="page-hero">
+      <span class="page-eyebrow">Buscador</span>
+      <h1 class="page-title">Buscar por jugador</h1>
+      <p class="page-subtitle">Localiza la base de cualquier jugador en el mapa por su nombre.</p>
+    </header>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="grid grid-3" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr));align-items:end;">
+        <div>
+          <label class="card-muted" for="ps-name">Nombre del jugador</label>
+          <input class="input" type="text" id="ps-name" placeholder="Ej: DaBeanMachine">
+        </div>
+        <div>
+          <label class="card-muted" for="ps-server">Server</label>
+          <input class="input" type="number" id="ps-server" value="1600">
+        </div>
+        <div style="grid-column:1/-1;">
+          <button class="btn btn-primary btn-block" id="ps-btn">Buscar jugador</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ps-body"><div class="empty">Introduce un nombre y busca la base del jugador.</div></div>
+
+  </main>
+
+  <footer class="footer">
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
+
+  <script type="module" src="../js/navHeader.js"></script>
+  <script type="module" src="../js/modules/playerSearchPage.js"></script>
+</body>
+</html>

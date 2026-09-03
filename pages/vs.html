@@ -1,42 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/vs.css">
-    <link rel="stylesheet" href="../nav.css">
-    <link href="../style.css" rel="stylesheet">
-    <link href="../styles/roster.css" rel="stylesheet">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VS — Last War Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="../nav.css">
 </head>
 <body>
-          <header>
-        <h1>Last War Guide</h1>
 
-        <p id="day-text"></p>
-        <div class="controls">
+  <main class="page">
 
-    <button id="prev-day">
-      ←
-    </button>
+    <div class="session-banner warn" id="session-banner" style="display:none;">
+      <span>⚠️</span>
+      <span id="session-banner-text">Cargando estado de la sesión...</span>
+    </div>
 
-    <button id="next-day">
-      →
-    </button>
+    <header class="page-hero">
+      <span class="page-eyebrow">VS · Guerra de servidores</span>
+      <h1 class="page-title">VS Battle</h1>
+      <p class="page-subtitle">Rankings, emparejamientos, calendario y temporada del VS.</p>
+    </header>
 
-  </div>
-      </header>
+    <div class="tabs" id="vs-tabs">
+      <button class="tab is-active" data-tab="rankings">🏆 Rankings</button>
+      <button class="tab" data-tab="matchups">⚔️ Matchups</button>
+      <button class="tab" data-tab="schedule">📅 Calendario</button>
+      <button class="tab" data-tab="season">🎖 Temporada</button>
+    </div>
 
-      <section class="card">
+    <section id="vs-rankings" class="stack">
+      <div class="row">
+        <button class="btn" id="vs-rk-btn">Cargar rankings</button>
+        <span class="badge badge-muted" id="vs-rk-meta">requiere sesión</span>
+      </div>
+      <div id="vs-rankings-body"><div class="empty">Haz clic en "Cargar rankings".</div></div>
+    </section>
 
-        <h2 id="event-title"></h2>
+    <section id="vs-matchups" class="stack" style="display:none;">
+      <button class="btn" id="vs-mt-btn">Cargar matchups</button>
+      <div id="vs-matchups-body"><div class="empty">Haz clic en "Cargar matchups".</div></div>
+    </section>
 
-        <div id="tasks-container"></div>
+    <section id="vs-schedule" class="stack" style="display:none;">
+      <button class="btn" id="vs-sc-btn">Cargar calendario</button>
+      <div id="vs-schedule-body"><div class="empty">Haz clic en "Cargar calendario".</div></div>
+    </section>
 
-      </section>
+    <section id="vs-season" class="stack" style="display:none;">
+      <button class="btn" id="vs-sn-btn">Cargar temporada</button>
+      <div id="vs-season-body"><div class="empty">Haz clic en "Cargar temporada".</div></div>
+    </section>
 
-      <script type="module" src="../js/navHeader.js"></script>
-      <script type="module" src="../js/modules/vs.js"></script>
-      <script type="module" src="../js/main.js"></script>
+  </main>
+
+  <footer class="footer">
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
+
+  <script type="module" src="../js/navHeader.js"></script>
+  <script type="module" src="../js/modules/vsPage.js"></script>
 </body>
 </html>

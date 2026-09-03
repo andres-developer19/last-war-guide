@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Map Scan — Last War Guide</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles/mapscan.css">
-<link rel="stylesheet" href="../nav.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa — Last War Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="../nav.css">
 </head>
 <body>
 
-<section class="scan-section">
+  <main class="page">
 
-    <div class="scan-header">
+    <div class="session-banner" id="session-banner" style="display:none;"></div>
+
+    <header class="page-hero">
+      <span class="page-eyebrow">Mapa · Warzone</span>
+      <h1 class="page-title">Explorar el mapa</h1>
+      <p class="page-subtitle">Consulta un bloque del mapa por coordenadas para ver bases, zombies y jugadores.</p>
+    </header>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="grid grid-3" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr));align-items:end;">
         <div>
-            <span class="scan-eyebrow">Map Scan · Warzone</span>
-            <h2>Objetivos del mapa</h2>
+          <label class="card-muted" for="map-x">X</label>
+          <input class="input" type="number" id="map-x" value="100">
         </div>
-        <!-- <a href="index.html" class="scan-volver">&larr; Volver a la guía</a> -->
+        <div>
+          <label class="card-muted" for="map-y">Y</label>
+          <input class="input" type="number" id="map-y" value="100">
+        </div>
+        <div>
+          <label class="card-muted" for="map-server">Server</label>
+          <input class="input" type="number" id="map-server" value="1600">
+        </div>
+        <div style="grid-column:1/-1;">
+          <button class="btn btn-primary btn-block" id="map-btn">Consultar bloque</button>
+        </div>
+      </div>
     </div>
 
-    <div class="scan-tabs">
-        <button class="scan-tab is-active" data-filter="secret_tasks">Tareas secretas</button>
-        <button class="scan-tab" data-filter="player_bases">Bases de jugadores</button>
-    </div>
+    <div id="map-body"><div class="empty">Introduce coordenadas y consulta un bloque.</div></div>
 
-    <div class="scan-toolbar">
-        <button id="scan-btn-buscar" class="scan-btn-primary">Buscar objetivos</button>
-        <label class="scan-toggle">
-            <input type="checkbox" id="scan-modo-prueba">
-            Usar datos de ejemplo (no gasta cuota)
-        </label>
-        <span id="scan-estado" class="scan-estado">Sin escanear todavía.</span>
-    </div>
+  </main>
 
-    <div id="scan-resumen" class="scan-resumen"></div>
+  <footer class="footer">
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
 
-    <div id="scan-resultados" class="scan-grid"></div>
-
-</section>
-<script type="module" src="../js/navHeader.js"></script>
-<script type="module" src="../js/modules/mapscanPage.js"></script>
+  <script type="module" src="../js/navHeader.js"></script>
+  <script type="module" src="../js/modules/mapPage.js"></script>
 </body>
 </html>

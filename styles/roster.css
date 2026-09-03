@@ -1,142 +1,56 @@
 /* ============================================
-   ROSTER DE ALIANZA — estilo "placa militar"
+   ROSTER DE ALIANZA — integrado con theme.css
    ============================================ */
 
-:root {
-  --roster-bg-void: #12151a;
-  --roster-bg-panel: #1c2128;
-  --roster-bg-panel-hover: #232a33;
-  --roster-accent: #e8a33d;
-  --roster-accent-dim: #a67328;
-  --roster-radio-green: #4f7a68;
-  --roster-text: #eae6da;
-  --roster-text-muted: #8b93a1;
-  --roster-border: #343942;
-}
-
-.roster-section {
-  background: var(--roster-bg-void);
-  padding: 2.5rem 1.25rem 3rem;
-  color: var(--roster-text);
-  font-family: 'Inter', system-ui, sans-serif;
-}
-
-.roster-header {
-  max-width: 1100px;
-  margin: 0 auto 1.75rem;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  border-bottom: 1px solid var(--roster-border);
-  padding-bottom: 1rem;
-}
-
-.roster-header .roster-eyebrow {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--roster-radio-green);
-  display: block;
-  margin-bottom: 0.3rem;
-}
-
-.roster-header h2 {
-  font-family: 'Oswald', 'Arial Narrow', sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  margin: 0;
-  color: var(--roster-text);
-}
-
-.roster-count {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.9rem;
-  color: var(--roster-accent);
-  background: rgba(232, 163, 61, 0.1);
-  border: 1px solid var(--roster-accent-dim);
-  padding: 0.35rem 0.7rem;
-}
-
-.roster-search {
-  max-width: 1100px;
-  margin: 0 auto 1.5rem;
-}
-
-.roster-search input {
-  width: 100%;
-  background: var(--roster-bg-panel);
-  border: 1px solid var(--roster-border);
-  color: var(--roster-text);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  padding: 0.7rem 1rem;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.roster-search input:focus {
-  border-color: var(--roster-accent);
-}
-
-.roster-search input::placeholder {
-  color: var(--roster-text-muted);
-}
-
 .roster-grid {
-  max-width: 1100px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 0.9rem;
 }
 
-/* --- La placa militar --- */
 .roster-tag {
   position: relative;
-  background: var(--roster-bg-panel);
-  border: 1px solid var(--roster-border);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 1rem 1rem 0.9rem 1.6rem;
-  transition: background 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+  transition: border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
 }
 
 .roster-tag:hover {
-  background: var(--roster-bg-panel-hover);
+  border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
-/* muesca perforada estilo dog-tag */
 .roster-tag::before {
   content: "";
   position: absolute;
   top: 50%;
-  left: 0.55rem;
-  width: 7px;
-  height: 7px;
+  left: 0.7rem;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--roster-bg-void);
-  border: 1px solid var(--roster-border);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
   transform: translateY(-50%);
 }
 
 .roster-rank {
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: var(--roster-text-muted);
+  color: var(--text-muted);
   letter-spacing: 0.05em;
 }
 
 .roster-name {
-  font-family: 'Oswald', 'Arial Narrow', sans-serif;
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  color: var(--roster-text);
+  color: var(--text);
   margin: 0.15rem 0 0.5rem;
   white-space: nowrap;
   overflow: hidden;
@@ -147,136 +61,35 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--roster-radio-green);
-  border-top: 1px dashed var(--roster-border);
+  color: var(--info);
+  border-top: 1px dashed var(--border);
   padding-top: 0.5rem;
 }
 
 .roster-stats .roster-power {
-  color: var(--roster-accent);
+  color: var(--accent);
   font-weight: 600;
 }
 
 .roster-empty,
 .roster-error {
-  max-width: 1100px;
-  margin: 2rem auto;
+  grid-column: 1 / -1;
   text-align: center;
-  color: var(--roster-text-muted);
-  font-family: 'Roboto Mono', monospace;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
   font-size: 0.9rem;
-  padding: 2rem;
-  border: 1px dashed var(--roster-border);
+  padding: 2.5rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
 }
 
 .roster-error {
-  color: #d9706f;
-  border-color: #6b3535;
+  color: var(--danger);
+  border-color: rgba(229, 87, 74, 0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .roster-tag {
-    transition: none;
-  }
-}
-
-/* --- Placa clicable --- */
-.roster-tag {
-  cursor: pointer;
-}
-
-/* --- Modal de detalle de jugador --- */
-.roster-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 12, 15, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 1000;
-}
-
-.roster-modal {
-  background: var(--roster-bg-panel);
-  border: 1px solid var(--roster-border);
-  max-width: 480px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  padding: 1.5rem;
-  position: relative;
-  color: var(--roster-text);
-  font-family: 'Inter', sans-serif;
-}
-
-.roster-modal-close {
-  position: absolute;
-  top: 0.9rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: var(--roster-text-muted);
-  font-size: 1.3rem;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.roster-modal-close:hover {
-  color: var(--roster-accent);
-}
-
-.roster-modal-eyebrow {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--roster-radio-green);
-  display: block;
-  margin-bottom: 0.3rem;
-}
-
-.roster-modal h3 {
-  font-family: 'Oswald', 'Arial Narrow', sans-serif;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  margin: 0 0 1rem;
-}
-
-.roster-modal-section {
-  margin-top: 1.1rem;
-  border-top: 1px dashed var(--roster-border);
-  padding-top: 0.9rem;
-}
-
-.roster-modal-section h4 {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--roster-text-muted);
-  margin: 0 0 0.6rem;
-}
-
-.roster-modal-loading,
-.roster-modal-error {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--roster-text-muted);
-}
-
-.roster-modal-error {
-  color: #d9706f;
-}
-
-.roster-modal pre {
-  background: var(--roster-bg-void);
-  border: 1px solid var(--roster-border);
-  padding: 0.7rem;
-  font-size: 0.75rem;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  word-break: break-word;
+  .roster-tag { transition: none; }
 }

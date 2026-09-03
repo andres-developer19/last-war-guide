@@ -3,47 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Last War Daily Guide</title>
+  <title>Last War Guide — Command Center</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="../styles/roster.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/theme.css">
   <link rel="stylesheet" href="nav.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div class="container">
-    
+  <main class="page">
 
-
-
-    <section class="roster-section">
-  <div class="roster-header">
-    <div>
-      <span class="roster-eyebrow">Alianza · Warzone</span>
-      <h2 id="roster-title">Alianza: CVeN</h2>
+    <div class="session-banner warn" id="session-banner" style="display:none;">
+      <span>⚠️</span>
+      <span id="session-banner-text">Cargando estado de la sesión...</span>
     </div>
-    <span class="roster-count" id="roster-count">— miembros</span>
-  </div>
 
-  <div class="roster-search">
-    <input type="text" id="roster-search-input" placeholder="Buscar miembro por nombre...">
-  </div>
+    <header class="page-hero">
+      <span class="page-eyebrow">Command Center</span>
+      <h1 class="page-title">Panel de guerra</h1>
+      <p class="page-subtitle">Estado de tu server, rankings de alianzas, posiciones del reino y roster de tu alianza.</p>
+    </header>
 
-  <div class="roster-grid" id="roster-grid"></div>
-</section>
+    <div class="stack">
 
+      <!-- Resumen de estado del server -->
+      <section class="grid grid-3" id="status-grid"></section>
 
-  </div>
+      <!-- Rankings de alianzas -->
+      <section class="card">
+        <div class="row-between">
+          <h2 class="card-title"><span class="ico">🏆</span> Top alianzas del server</h2>
+          <span class="badge badge-muted" id="rankings-meta">Server 1600</span>
+        </div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Alianza</th>
+                <th class="right">Poder</th>
+                <th class="right">Miembros</th>
+                <th class="right">Líder</th>
+              </tr>
+            </thead>
+            <tbody id="rankings-body">
+              <tr><td colspan="5"><div class="loading"><span class="spinner"></span> Cargando rankings...</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Panel de dos columnas -->
+      <section class="grid grid-2">
+
+        <!-- Posiciones del reino -->
+        <div class="card">
+          <h2 class="card-title"><span class="ico">👑</span> Posiciones del reino</h2>
+          <div id="kingdom-body"></div>
+        </div>
+
+        <!-- Datos del pool -->
+        <div class="card">
+          <h2 class="card-title"><span class="ico">🔌</span> Conexión a la API</h2>
+          <div id="pool-body"></div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
 
   <footer class="footer">
-  <p>Emblemen 💪 es el mejor gocho de la alianza</p>
-</footer>
-<script type="module" src="./js/navHeader.js"></script>
-  <script type="module" src="./js/main.js"></script>1
-  <script type="module" src="./js/modules/roster.js"></script>
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
 
-
+  <script type="module" src="./js/navHeader.js"></script>
+  <script type="module" src="./js/modules/dashboard.js"></script>
 </body>
 </html>

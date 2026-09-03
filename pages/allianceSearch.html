@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buscar alianza — Last War Guide</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles/allianceSearch.css">
-<link rel="stylesheet" href="../nav.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alianzas — Last War Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/theme.css">
+  <link rel="stylesheet" href="../nav.css">
 </head>
 <body>
 
-<section class="as-section">
+  <main class="page">
 
-    <div class="as-header">
+    <header class="page-hero">
+      <span class="page-eyebrow">Directorio</span>
+      <h1 class="page-title">Alianzas del server</h1>
+      <p class="page-subtitle">Explora el ranking de alianzas de un server. Filtra por etiqueta o busca una alianza.</p>
+    </header>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="grid grid-3" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));align-items:end;">
         <div>
-            <span class="as-eyebrow">Directorio</span>
-            <h2>Buscar alianza</h2>
+          <label class="card-muted" for="as-server">Server</label>
+          <input class="input" type="number" id="as-server" value="1600" placeholder="Server">
         </div>
-        <a href="index.html" class="as-volver">&larr; Mi alianza</a>
+        <div>
+          <label class="card-muted" for="as-min-power">Poder mínimo (ej: 20B)</label>
+          <input class="input" type="text" id="as-min-power" placeholder="1B · 500M · 20B">
+        </div>
+        <div style="grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-primary" id="as-btn-cargar">Cargar ranking</button>
+          <input class="input" style="flex:1;min-width:180px;" id="as-filtro" placeholder="Filtrar por etiqueta...">
+        </div>
+      </div>
     </div>
 
-    <p class="as-hint">Busca por etiqueta/abreviatura (ej. "CVeN"), no por el nombre completo.</p>
+    <div id="as-estado" class="card-muted" style="margin-bottom:12px;">Selecciona un server y carga el ranking.</div>
+    <div id="as-resultados"></div>
 
-    <div class="as-toolbar">
-        <input type="text" id="as-input" class="as-input" placeholder="Ej: CVeN">
-        <button id="as-btn-buscar" class="as-btn-primary">Buscar</button>
-    </div>
+  </main>
 
-    <div id="as-estado" class="as-estado"></div>
+  <footer class="footer">
+    <p>Emblemen 💪 es el mejor gocho de la alianza</p>
+  </footer>
 
-    <div id="as-resultados" class="as-grid"></div>
-
-</section>
-<script type="module" src="../js/navHeader.js"></script>
-<script type="module" src="../js/modules/allianceSearchPage.js"></script>
+  <script type="module" src="../js/navHeader.js"></script>
+  <script type="module" src="../js/modules/allianceSearchPage.js"></script>
 </body>
 </html>
