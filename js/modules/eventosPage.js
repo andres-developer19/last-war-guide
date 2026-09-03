@@ -1,4 +1,5 @@
 import { apiRequest } from "../api.js";
+import { mostrarToast } from "../toast.js";
 
 function id(s) { return document.getElementById(s); }
 
@@ -76,9 +77,9 @@ async function ejecutarAccion(ruta, nombre, btn) {
     try {
         const res = await apiRequest(RUTAS_ACCION[ruta], { method: "POST" });
         if (res && res.error) throw new Error(res.error);
-        alert(`✅ ${nombre} completado.\n\n${res && res.message ? res.message : JSON.stringify(res)}`);
+        mostrarToast(`✅ ${nombre} completado${res && res.message ? ": " + res.message : ""}`, "success");
     } catch (e) {
-        alert(`❌ Error en ${nombre}:\n${e.message}`);
+        mostrarToast(`Error en ${nombre}: ${e.message}`, "error", 6000);
     } finally {
         btn.disabled = false;
         btn.innerHTML = original;

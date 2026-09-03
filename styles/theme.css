@@ -445,6 +445,75 @@ table.table {
 .footer strong { color: var(--accent); }
 
 /* ============================================================
+   ACCESIBILIDAD: FOCO VISIBLE
+   ============================================================ */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   TOAST / NOTIFICACIONES
+   ============================================================ */
+
+.toast-wrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-size: 0.86rem;
+  box-shadow: var(--shadow);
+  animation: toast-in 0.22s ease;
+}
+
+.toast.success { border-color: rgba(61, 220, 132, 0.4); }
+.toast.success .toast-icon { color: var(--success); }
+.toast.error { border-color: rgba(229, 87, 74, 0.4); }
+.toast.error .toast-icon { color: var(--danger); }
+.toast.info { border-color: rgba(79, 156, 240, 0.4); }
+.toast.info .toast-icon { color: var(--info); }
+
+.toast-icon { font-size: 1rem; line-height: 1.4; flex-shrink: 0; }
+.toast-msg { flex: 1; line-height: 1.45; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-soft); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -453,4 +522,18 @@ table.table {
   .page-title { font-size: 1.9rem; }
   .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
+  .toast-wrap { left: 16px; right: 16px; max-width: none; }
+}
+
+/* ============================================================
+   MOVIMIENTO REDUCIDO
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

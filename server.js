@@ -114,6 +114,16 @@ app.get("/health", (req, res) => {
 // Servir estáticos
 // ------------------------------------------------------------
 
+// Proteger archivos sensibles de ser servidos públicamente
+app.use("/", (req, res, next) => {
+    const bloqueados = [".env", ".env.example", "server.js", "package.json", "package-lock.json", "render.yaml", "README.md"];
+    const ruta = req.path.split("?")[0].split("/").pop().toLowerCase();
+    if (bloqueados.includes(ruta)) {
+        return res.status(404).end();
+    }
+    next();
+});
+
 // Directorio raíz del frontend (donde está este server.js)
 app.use(express.static(path.join(__dirname)));
 

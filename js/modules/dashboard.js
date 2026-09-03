@@ -51,8 +51,13 @@ async function cargarRankings() {
                 <td class="right card-muted">${a.leader || "—"}</td>
             </tr>
         `).join("");
+
+        const sg = id("sg-rank");
+        if (sg) sg.textContent = `${lista.length} alianzas · Top ${lista[0]?.abbr || "—"} con ${lista[0]?.power_formatted || "—"}`;
     } catch (e) {
         body.innerHTML = `<tr><td colspan="5"><div class="error">Error: ${e.message}</div></td></tr>`;
+        const sg = id("sg-rank");
+        if (sg) sg.textContent = "No disponible";
     }
 }
 
@@ -80,8 +85,13 @@ async function cargarReino() {
                 </div>
             </div>
         `).join("");
+
+        const sg = id("sg-reino");
+        if (sg) sg.textContent = `${lista.filter(p => p.player_name).length} posiciones en Server ${SERVER_ID}`;
     } catch (e) {
         cont.innerHTML = `<div class="error">Error: ${e.message}</div>`;
+        const sg = id("sg-reino");
+        if (sg) sg.textContent = "No disponible";
     }
 }
 
@@ -114,8 +124,13 @@ async function cargarPool() {
                 </div>
             </div>
         `;
+
+        const sg = id("sg-pool");
+        if (sg) sg.textContent = `${c.state || data.status || "—"} · ${data.ready_connections ?? data.total_connections ?? "—"} conexiones`;
     } catch (e) {
         cont.innerHTML = `<div class="error">Error: ${e.message}</div>`;
+        const sg = id("sg-pool");
+        if (sg) sg.textContent = "No disponible";
     }
 }
 

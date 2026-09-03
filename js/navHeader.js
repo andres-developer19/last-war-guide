@@ -34,21 +34,22 @@ function crearHeader() {
 
     header.innerHTML = `
         <div class="nav-inner">
-            <div class="nav-marca">
+            <a class="nav-marca" href="${obtenerRuta("index.html")}" aria-label="Ir al inicio">
                 <span class="logo-mark">⚔</span>
                 <span class="logo-text">
                     Last War Guide<em>Command Center</em>
                 </span>
-            </div>
+            </a>
 
-            <button class="nav-toggle" aria-label="Menú">☰</button>
+            <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
 
-            <nav class="nav-links" id="nav-links">
+            <nav class="nav-links" id="nav-links" aria-label="Navegación principal">
                 ${ENLACES.map(enlace => `
                     <a
                         href="${obtenerRuta(enlace.archivo)}"
                         class="nav-link ${actual === enlace.archivo ? "is-active" : ""}"
                         data-nav
+                        ${actual === enlace.archivo ? 'aria-current="page"' : ""}
                     >
                         ${enlace.texto}
                     </a>
@@ -60,8 +61,18 @@ function crearHeader() {
     document.body.prepend(header);
 
     // Menú móvil
-    header.querySelector(".nav-toggle").addEventListener("click", () => {
-        header.querySelector(".nav-links").classList.toggle("open");
+    const navLinks = header.querySelector(".nav-links");
+    const toggle = header.querySelector(".nav-toggle");
+    toggle.addEventListener("click", () => {
+        const abierto = navLinks.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(abierto));
+    });
+
+    // Cierra el menú al hacer clic en un enlace (móvil)
+    navLinks.addEventListener("click", (e) => {
+        if (e.target.closest(".nav-link")) {
+            navLinks.classList.remove("open");
+        }
     });
 }
 
